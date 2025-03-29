@@ -1,113 +1,156 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import QuestionCard from '../components/QuestionCard';
+import ResultCard from '../components/ResultCard';
 
-// Danh sách câu hỏi mẫu từ 3 chủ đề
-const allQuestions = [
-  // Toán học
-  { id: 'q1', question: '1 + 2 = ?', options: ['2', '3', '4'], answer: '3' },
-  { id: 'q2', question: '5 - 3 = ?', options: ['1', '2', '3'], answer: '2' },
-  // Chữ cái
-  { id: 'q3', question: 'Chữ nào đứng sau "b"?', options: ['c', 'd', 'a'], answer: 'c' },
-  { id: 'q4', question: 'Chữ nào trước "e"?', options: ['d', 'g', 'f'], answer: 'd' },
-  // Ghép vần
-  { id: 'q5', question: 'b + a = ?', options: ['ba', 'ab', 'bo'], answer: 'ba' },
-  { id: 'q6', question: 'c + o = ?', options: ['oc', 'co', 'cu'], answer: 'co' }
+const allTopicFiles = [
+  'addition.json',
+  'subtraction.json',
+  'comparison.json',
+  'pattern.json',
+  'arrange.json',
+  'find-missing.json',
+  'height.json',
+  'position.json',
+  'counting.json',
+  'quantity-compare.json',
 ];
 
-export default function PracticeScreen() {
+interface Question {
+  id: string;
+  question: string;
+  options: string[];
+  answer: string;
+}
+
+const PracticeScreen = () => {
   const [numQuestions, setNumQuestions] = useState<number | null>(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-  const [shuffledQuestions, setShuffledQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [current, setCurrent] = useState(0);
+  const [score, setScore] = useState(0);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [showResult, setShowResult] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const startPractice = (count: number) => {
-    const shuffled = allQuestions.sort(() => Math.random() - 0.5).slice(0, count);
-    setShuffledQuestions(shuffled);
-    setNumQuestions(count);
-    setCurrentIndex(0);
-    setSelectedAnswers([]);
-  };
+  const shuffle = (arr: any[]) => arr.sort(() => Math.random() - 0.5);
 
-  const handleAnswer = (answer: string) => {
-    setSelectedAnswers([...selectedAnswers, answer]);
-    if (currentIndex + 1 < (numQuestions || 0)) {
-      setCurrentIndex(currentIndex + 1);
+  const loadQuestions = async (total: number) => {
+    setLoading(true);
+    let all: Question[] = [];
+
+    for (const file of allTopicFiles) {
+      const filePath = require(`../assets/data/toan/${file}`);
+      const res = await fetch(filePath);
+      const data = await res.json();
+      all.push(...data);
     }
+
+    const randomQuestions = shuffle(all).slice(0, total);
+    setQuestions(randomQuestions);
+    setLoading(false);
   };
 
-  const getScore = () => {
-    return shuffledQuestions.reduce((score, q, idx) => {
-      return q.answer === selectedAnswers[idx] ? score + 1 : score;
-    }, 0);
+  const startPractice = async (num: number) => {
+    setNumQuestions(num);
+    await loadQuestions(num);
+  };
+
+  const handleSelect = (option: string) => {
+    setSelected(option);
+    if (option === questions[current].answer) {
+      setScore(score + 1);
+    }
+    setTimeout(() => {
+      if (current + 1 < questions.length) {
+        setCurrent(current + 1);
+        setSelected(null);
+      } else {
+        setShowResult(true);
+      }
+    }, 700);
+  };
+
+  const handleRestart = () => {
+    setNumQuestions(null);
+    setQuestions([]);
+    setCurrent(0);
+    setScore(0);
+    setSelected(null);
+    setShowResult(false);
   };
 
   if (!numQuestions) {
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Bạn muốn luyện tập bao nhiêu câu?</Text>
-        {[5, 10, 15].map((num) => (
-          <TouchableOpacity key={num} style={styles.choiceBtn} onPress={() => startPractice(num)}>
-            <Text style={styles.choiceText}>{num} câu</Text>
+        <Text style={styles.title}>📝 Bạn muốn luyện bao nhiêu câu?</Text>
+        {[5, 10, 15].map((n) => (
+          <TouchableOpacity key={n} style={styles.choiceButton} onPress={() => startPractice(n)}>
+            <Text style={styles.buttonText}>{n} câu hỏi</Text>
           </TouchableOpacity>
         ))}
       </View>
     );
   }
 
-  const currentQuestion = shuffledQuestions[currentIndex];
-  const isFinished = selectedAnswers.length === numQuestions;
+  if (loading) {
+    return <ActivityIndicator style={{ marginTop: 50 }} />;
+  }
+
+  if (showResult) {
+    return (
+      <ResultCard
+        score={score}
+        total={questions.length}
+        onRetry={handleRestart}
+        onBack={handleRestart}
+      />
+    );
+  }
+
+  const q = questions[current];
 
   return (
     <View style={styles.container}>
-      {!isFinished ? (
-        <>
-          <Text style={styles.title}>Câu {currentIndex + 1}/{numQuestions}</Text>
-          <Text style={styles.question}>{currentQuestion.question}</Text>
-          <FlatList
-            data={currentQuestion.options}
-            keyExtractor={(item) => item}
-            renderItem={({ item }) => (
-              <TouchableOpacity style={styles.optionBtn} onPress={() => handleAnswer(item)}>
-                <Text style={styles.optionText}>{item}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        </>
-      ) : (
-        <View style={styles.resultBox}>
-          <Text style={styles.title}>Hoàn thành rồi!</Text>
-          <Text style={styles.score}>
-            Bạn đúng {getScore()} / {numQuestions} câu 🎉
-          </Text>
-          <TouchableOpacity style={styles.choiceBtn} onPress={() => setNumQuestions(null)}>
-            <Text style={styles.choiceText}>Làm lại</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <Text style={styles.progress}>Câu {current + 1}/{questions.length}</Text>
+      <QuestionCard
+        question={q.question}
+        options={q.options}
+        correctAnswer={q.answer}
+        selected={selected}
+        onSelect={handleSelect}
+      />
     </View>
   );
-}
+};
+
+export default PracticeScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 24, justifyContent: 'center' },
-  title: { fontSize: 22, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 },
-  choiceBtn: {
-    backgroundColor: '#ffd966',
-    padding: 14,
-    marginVertical: 6,
-    borderRadius: 10,
-    alignItems: 'center'
+  container: {
+    flex: 1,
+    padding: 24,
+    justifyContent: 'center',
   },
-  choiceText: { fontSize: 18, fontWeight: '600' },
-  question: { fontSize: 20, textAlign: 'center', marginBottom: 16 },
-  optionBtn: {
-    backgroundColor: '#fef4d3',
-    padding: 12,
-    marginVertical: 6,
-    borderRadius: 10,
-    alignItems: 'center'
+  title: {
+    fontSize: 22,
+    fontWeight: '600',
+    textAlign: 'center',
+    marginBottom: 20,
   },
-  optionText: { fontSize: 18 },
-  resultBox: { alignItems: 'center', gap: 12 },
-  score: { fontSize: 24, fontWeight: 'bold', color: '#28c76f' }
+  choiceButton: {
+    backgroundColor: '#FFD580',
+    padding: 16,
+    borderRadius: 12,
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: '500',
+  },
+  progress: {
+    fontSize: 16,
+    marginBottom: 12,
+    color: '#666',
+  },
 });

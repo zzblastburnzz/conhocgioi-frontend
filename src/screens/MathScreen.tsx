@@ -1,61 +1,73 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { updateProgress } from '../utils/progress';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-const questions = [
-  { question: '1 + 1 = ?', correctAnswer: '2', options: ['1', '2', '3'] },
-  { question: '2 + 3 = ?', correctAnswer: '5', options: ['4', '5', '6'] },
-  { question: '5 - 2 = ?', correctAnswer: '3', options: ['2', '3', '4'] }
+const mathTopics = [
+  { title: 'Phép cộng', file: 'addition.json' },
+  { title: 'Phép trừ', file: 'subtraction.json' },
+  { title: 'So sánh số', file: 'comparison.json' },
+  { title: 'Tìm quy luật', file: 'pattern.json' },
+  { title: 'Sắp xếp số', file: 'arrange.json' },
+  { title: 'Tìm số còn thiếu', file: 'find-missing.json' },
+  { title: 'Cao – thấp – to – nhỏ', file: 'height.json' },
+  { title: 'Trái – phải – trước – sau', file: 'position.json' },
+  { title: 'Đếm số lượng', file: 'counting.json' },
+  { title: 'So sánh số lượng', file: 'quantity-compare.json' },
 ];
 
-export default function MathScreen() {
-  const [index, setIndex] = useState(0);
-  const current = questions[index];
+const MathScreen = () => {
+  const navigation = useNavigation<any>();
 
-  const handleAnswer = (option: string) => {
-    if (option === current.correctAnswer) {
-      Alert.alert('Chính xác!', '', [
-        {
-          text: 'Tiếp tục',
-          onPress: async () => {
-            if (index + 1 < questions.length) {
-              setIndex(index + 1);
-            } else {
-              await updateProgress('Bon', 'Toán');
-              Alert.alert('Hoàn thành!', 'Bé đã làm xong bài Toán.');
-              setIndex(0);
-            }
-          }
-        }
-      ]);
-    } else {
-      Alert.alert('Sai rồi!', 'Thử lại nhé!');
-    }
+  const goToLesson = (file: string, title: string) => {
+    navigation.navigate('Lesson', { fileName: file, title });
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.question}>{current.question}</Text>
-      {current.options.map((opt) => (
-        <TouchableOpacity key={opt} style={styles.option} onPress={() => handleAnswer(opt)}>
-          <Text style={styles.optionText}>{opt}</Text>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.header}>🧠 Các chủ đề Toán học</Text>
+      {mathTopics.map((topic, index) => (
+        <TouchableOpacity
+          key={index}
+          style={styles.card}
+          onPress={() => goToLesson(topic.file, topic.title)}
+        >
+          <Text style={styles.cardText}>{topic.title}</Text>
         </TouchableOpacity>
       ))}
-      <Text style={styles.progress}>Câu {index + 1} / {questions.length}</Text>
-    </View>
+    </ScrollView>
   );
-}
+};
+
+export default MathScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', padding: 20 },
-  question: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
-  option: {
-    backgroundColor: '#d9f8ff',
-    paddingVertical: 14,
-    borderRadius: 10,
+  container: {
+    padding: 20,
+    paddingBottom: 40,
     alignItems: 'center',
-    marginVertical: 5
   },
-  optionText: { fontSize: 18 },
-  progress: { marginTop: 20, textAlign: 'center', color: '#666' }
+  header: {
+    fontSize: 24,
+    fontWeight: '600',
+    marginBottom: 20,
+    color: '#333',
+  },
+  card: {
+    backgroundColor: '#FFD580',
+    borderRadius: 16,
+    padding: 20,
+    width: '100%',
+    marginBottom: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  cardText: {
+    fontSize: 18,
+    fontWeight: '500',
+    color: '#4B3F2F',
+  },
 });

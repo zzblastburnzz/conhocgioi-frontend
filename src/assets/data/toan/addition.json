@@ -1,0 +1,22 @@
+[
+  { "id": "add_001", "question": "1 + 2 = ?", "options": ["2", "3", "4"], "answer": "3" },
+  { "id": "add_002", "question": "2 + 2 = ?", "options": ["3", "4", "5"], "answer": "4" },
+  { "id": "add_003", "question": "3 + 1 = ?", "options": ["3", "4", "5"], "answer": "4" },
+  { "id": "add_004", "question": "4 + 2 = ?", "options": ["5", "6", "7"], "answer": "6" },
+  { "id": "add_005", "question": "5 + 0 = ?", "options": ["4", "5", "6"], "answer": "5" },
+  { "id": "add_006", "question": "3 + 3 = ?", "options": ["5", "6", "7"], "answer": "6" },
+  { "id": "add_007", "question": "1 + 4 = ?", "options": ["4", "5", "6"], "answer": "5" },
+  { "id": "add_008", "question": "2 + 5 = ?", "options": ["6", "7", "8"], "answer": "7" },
+  { "id": "add_009", "question": "6 + 1 = ?", "options": ["6", "7", "8"], "answer": "7" },
+  { "id": "add_010", "question": "0 + 6 = ?", "options": ["5", "6", "7"], "answer": "6" },
+  { "id": "add_011", "question": "5 + 3 = ?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "add_012", "question": "7 + 1 = ?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "add_013", "question": "4 + 4 = ?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "add_014", "question": "2 + 6 = ?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "add_015", "question": "8 + 0 = ?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "add_016", "question": "3 + 5 = ?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "add_017", "question": "6 + 2 = ?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "add_018", "question": "1 + 6 = ?", "options": ["6", "7", "8"], "answer": "7" },
+  { "id": "add_019", "question": "7 + 2 = ?", "options": ["8", "9", "10"], "answer": "9" },
+  { "id": "add_020", "question": "0 + 9 = ?", "options": ["8", "9", "10"], "answer": "9" }
+]

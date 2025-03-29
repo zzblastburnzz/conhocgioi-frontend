@@ -1,0 +1,22 @@
+[
+  { "id": "pos_001", "question": "Quả bóng nằm bên nào của cái bàn?", "options": ["Trái", "Phải"], "answer": "Trái" },
+  { "id": "pos_002", "question": "Con mèo đứng ở đâu so với cái ghế?", "options": ["Trước", "Sau"], "answer": "Sau" },
+  { "id": "pos_003", "question": "Xe đạp nằm ở bên nào của ô tô?", "options": ["Trái", "Phải"], "answer": "Phải" },
+  { "id": "pos_004", "question": "Con chó ở trước hay sau ngôi nhà?", "options": ["Trước", "Sau"], "answer": "Trước" },
+  { "id": "pos_005", "question": "Bé đứng ở bên nào của mẹ?", "options": ["Trái", "Phải"], "answer": "Phải" },
+  { "id": "pos_006", "question": "Bút nằm ở đâu so với quyển sách?", "options": ["Trên", "Dưới"], "answer": "Trên" },
+  { "id": "pos_007", "question": "Con gấu bông ở đâu so với cái tủ?", "options": ["Bên trái", "Bên phải"], "answer": "Bên phải" },
+  { "id": "pos_008", "question": "Bạn Lan đứng ở đâu so với bạn Nam?", "options": ["Phía trước", "Phía sau"], "answer": "Phía sau" },
+  { "id": "pos_009", "question": "Chiếc mũ nằm bên nào của chiếc áo?", "options": ["Trái", "Phải"], "answer": "Trái" },
+  { "id": "pos_010", "question": "Con vịt ở đâu so với ao nước?", "options": ["Trên", "Dưới"], "answer": "Trên" },
+  { "id": "pos_011", "question": "Xe máy ở trước hay sau ô tô?", "options": ["Trước", "Sau"], "answer": "Sau" },
+  { "id": "pos_012", "question": "Cái ly nằm ở đâu so với đĩa?", "options": ["Trên", "Dưới"], "answer": "Trên" },
+  { "id": "pos_013", "question": "Con thỏ nằm bên nào của củ cà rốt?", "options": ["Trái", "Phải"], "answer": "Phải" },
+  { "id": "pos_014", "question": "Bạn nhỏ đứng ở đâu trong hàng?", "options": ["Đầu hàng", "Cuối hàng"], "answer": "Đầu hàng" },
+  { "id": "pos_015", "question": "Cuốn sách ở đâu trong kệ?", "options": ["Trên cùng", "Dưới cùng"], "answer": "Trên cùng" },
+  { "id": "pos_016", "question": "Ghế nằm ở đâu so với bàn?", "options": ["Dưới", "Bên cạnh"], "answer": "Bên cạnh" },
+  { "id": "pos_017", "question": "Quả cam nằm ở bên nào của quả chuối?", "options": ["Trái", "Phải"], "answer": "Phải" },
+  { "id": "pos_018", "question": "Con bò ở đâu so với chuồng?", "options": ["Ngoài", "Trong"], "answer": "Ngoài" },
+  { "id": "pos_019", "question": "Cái kéo ở đâu so với hộp bút?", "options": ["Bên trong", "Bên ngoài"], "answer": "Bên trong" },
+  { "id": "pos_020", "question": "Bạn Minh ngồi ở đâu trong lớp?", "options": ["Hàng đầu", "Hàng sau"], "answer": "Hàng đầu" }
+]

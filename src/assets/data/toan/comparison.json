@@ -1,0 +1,22 @@
+[
+  { "id": "cmp_001", "question": "Số nào lớn hơn: 1 hay 2?", "options": ["1", "2"], "answer": "2" },
+  { "id": "cmp_002", "question": "Số nào lớn hơn: 4 hay 3?", "options": ["4", "3"], "answer": "4" },
+  { "id": "cmp_003", "question": "Số nào lớn hơn: 5 hay 8?", "options": ["5", "8"], "answer": "8" },
+  { "id": "cmp_004", "question": "Số nào lớn hơn: 9 hay 6?", "options": ["9", "6"], "answer": "9" },
+  { "id": "cmp_005", "question": "Số nào lớn hơn: 7 hay 7?", "options": ["7", "7"], "answer": "7" },
+  { "id": "cmp_006", "question": "Số nào lớn hơn: 2 hay 0?", "options": ["2", "0"], "answer": "2" },
+  { "id": "cmp_007", "question": "Số nào lớn hơn: 6 hay 4?", "options": ["6", "4"], "answer": "6" },
+  { "id": "cmp_008", "question": "Số nào lớn hơn: 3 hay 9?", "options": ["3", "9"], "answer": "9" },
+  { "id": "cmp_009", "question": "Số nào lớn hơn: 8 hay 8?", "options": ["8", "8"], "answer": "8" },
+  { "id": "cmp_010", "question": "Số nào lớn hơn: 10 hay 5?", "options": ["10", "5"], "answer": "10" },
+  { "id": "cmp_011", "question": "Số nào lớn hơn: 11 hay 12?", "options": ["11", "12"], "answer": "12" },
+  { "id": "cmp_012", "question": "Số nào lớn hơn: 14 hay 13?", "options": ["14", "13"], "answer": "14" },
+  { "id": "cmp_013", "question": "Số nào lớn hơn: 15 hay 15?", "options": ["15", "15"], "answer": "15" },
+  { "id": "cmp_014", "question": "Số nào lớn hơn: 17 hay 19?", "options": ["17", "19"], "answer": "19" },
+  { "id": "cmp_015", "question": "Số nào lớn hơn: 20 hay 20?", "options": ["20", "20"], "answer": "20" },
+  { "id": "cmp_016", "question": "Số nào nhỏ hơn: 4 hay 6?", "options": ["4", "6"], "answer": "4" },
+  { "id": "cmp_017", "question": "Số nào nhỏ hơn: 7 hay 2?", "options": ["7", "2"], "answer": "2" },
+  { "id": "cmp_018", "question": "Số nào lớn hơn: 3 hay 3?", "options": ["3", "Bằng nhau"], "answer": "Bằng nhau" },
+  { "id": "cmp_019", "question": "Số nào nhỏ hơn: 9 hay 9?", "options": ["9", "Bằng nhau"], "answer": "Bằng nhau" },
+  { "id": "cmp_020", "question": "Số nào lớn hơn: 0 hay 5?", "options": ["0", "5"], "answer": "5" }
+]

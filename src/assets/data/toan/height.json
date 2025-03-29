@@ -1,0 +1,22 @@
+[
+  { "id": "hgt_001", "question": "Ai cao hơn?", "options": ["Bạn A", "Bạn B"], "answer": "Bạn B" },
+  { "id": "hgt_002", "question": "Cây nào thấp hơn?", "options": ["Cây táo", "Cây xoài"], "answer": "Cây táo" },
+  { "id": "hgt_003", "question": "Con vật nào to hơn?", "options": ["Con mèo", "Con voi"], "answer": "Con voi" },
+  { "id": "hgt_004", "question": "Đồ vật nào nhỏ hơn?", "options": ["Cái bàn", "Chiếc bút"], "answer": "Chiếc bút" },
+  { "id": "hgt_005", "question": "Người nào thấp hơn?", "options": ["Bé An", "Anh Minh"], "answer": "Bé An" },
+  { "id": "hgt_006", "question": "Cái gì cao hơn?", "options": ["Cây nấm", "Cây thông"], "answer": "Cây thông" },
+  { "id": "hgt_007", "question": "Động vật nào nhỏ hơn?", "options": ["Chim sẻ", "Gà trống"], "answer": "Chim sẻ" },
+  { "id": "hgt_008", "question": "Ai to con hơn?", "options": ["Bé Tí", "Bé Tèo"], "answer": "Bé Tèo" },
+  { "id": "hgt_009", "question": "Đồ chơi nào nhỏ hơn?", "options": ["Ô tô đồ chơi", "Gấu bông lớn"], "answer": "Ô tô đồ chơi" },
+  { "id": "hgt_010", "question": "Cây nào cao hơn?", "options": ["Cây chuối", "Cây dừa"], "answer": "Cây dừa" },
+  { "id": "hgt_011", "question": "Bạn nào nhỏ con hơn?", "options": ["Bạn Lan", "Bạn Bình"], "answer": "Bạn Lan" },
+  { "id": "hgt_012", "question": "Đồ vật nào to hơn?", "options": ["Cặp sách", "Cục tẩy"], "answer": "Cặp sách" },
+  { "id": "hgt_013", "question": "Con gì nhỏ hơn?", "options": ["Con trâu", "Con chó"], "answer": "Con chó" },
+  { "id": "hgt_014", "question": "Ai thấp hơn?", "options": ["Mẹ", "Em bé"], "answer": "Em bé" },
+  { "id": "hgt_015", "question": "Cái gì lớn hơn?", "options": ["Quả bóng", "Viên bi"], "answer": "Quả bóng" },
+  { "id": "hgt_016", "question": "Con vật nào to hơn?", "options": ["Con cá voi", "Con cá vàng"], "answer": "Con cá voi" },
+  { "id": "hgt_017", "question": "Đồ chơi nào cao hơn?", "options": ["Ngọn tháp lego", "Chiếc xe mô hình"], "answer": "Ngọn tháp lego" },
+  { "id": "hgt_018", "question": "Người nào cao hơn?", "options": ["Ông", "Bé Bi"], "answer": "Ông" },
+  { "id": "hgt_019", "question": "Ai nhỏ hơn?", "options": ["Anh trai", "Em bé"], "answer": "Em bé" },
+  { "id": "hgt_020", "question": "Cây nào thấp hơn?", "options": ["Cây mít", "Cây lúa"], "answer": "Cây lúa" }
+]

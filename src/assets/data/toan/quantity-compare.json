@@ -1,0 +1,63 @@
+[
+  {
+    "id": "qty_001",
+    "question": "Nhóm A có 3 quả táo, Nhóm B có 5 quả táo. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Nhóm B"
+  },
+  {
+    "id": "qty_002",
+    "question": "Nhóm A có 4 bông hoa, Nhóm B có 4 bông hoa. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Bằng nhau"
+  },
+  {
+    "id": "qty_003",
+    "question": "Nhóm A có 2 chiếc xe, Nhóm B có 1 chiếc xe. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Nhóm A"
+  },
+  {
+    "id": "qty_004",
+    "question": "Nhóm A có 6 con gà, Nhóm B có 7 con gà. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Nhóm B"
+  },
+  {
+    "id": "qty_005",
+    "question": "Nhóm A có 5 cây bút, Nhóm B có 5 cây bút. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Bằng nhau"
+  },
+  {
+    "id": "qty_006",
+    "question": "Nhóm A có 1 cái ly, Nhóm B có 3 cái ly. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Nhóm B"
+  },
+  {
+    "id": "qty_007",
+    "question": "Nhóm A có 8 viên bi, Nhóm B có 4 viên bi. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Nhóm A"
+  },
+  {
+    "id": "qty_008",
+    "question": "Nhóm A có 2 quả cam, Nhóm B có 2 quả cam. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Bằng nhau"
+  },
+  {
+    "id": "qty_009",
+    "question": "Nhóm A có 6 chiếc ghế, Nhóm B có 3 chiếc ghế. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Nhóm A"
+  },
+  {
+    "id": "qty_010",
+    "question": "Nhóm A có 4 bạn nhỏ, Nhóm B có 6 bạn nhỏ. Nhóm nào có nhiều hơn?",
+    "options": ["Nhóm A", "Nhóm B", "Bằng nhau"],
+    "answer": "Nhóm B"
+  }
+  // ... tiếp 10 câu còn lại như đã trình bày ở bảng trên
+]

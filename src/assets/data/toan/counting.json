@@ -1,0 +1,22 @@
+[
+  { "id": "cnt_001", "question": "Có bao nhiêu quả táo?", "options": ["2", "3", "4"], "answer": "3" },
+  { "id": "cnt_002", "question": "Có bao nhiêu chiếc bút?", "options": ["4", "5", "6"], "answer": "5" },
+  { "id": "cnt_003", "question": "Có bao nhiêu con vịt?", "options": ["1", "2", "3"], "answer": "2" },
+  { "id": "cnt_004", "question": "Có bao nhiêu bông hoa?", "options": ["5", "6", "7"], "answer": "6" },
+  { "id": "cnt_005", "question": "Có bao nhiêu chiếc xe?", "options": ["3", "4", "5"], "answer": "4" },
+  { "id": "cnt_006", "question": "Có bao nhiêu quả bóng?", "options": ["6", "7", "8"], "answer": "7" },
+  { "id": "cnt_007", "question": "Có bao nhiêu ngôi sao?", "options": ["7", "8", "9"], "answer": "8" },
+  { "id": "cnt_008", "question": "Có bao nhiêu chiếc ghế?", "options": ["1", "2", "3"], "answer": "2" },
+  { "id": "cnt_009", "question": "Có bao nhiêu hộp sữa?", "options": ["2", "3", "4"], "answer": "3" },
+  { "id": "cnt_010", "question": "Có bao nhiêu quyển sách?", "options": ["5", "6", "7"], "answer": "6" },
+  { "id": "cnt_011", "question": "Có bao nhiêu con gà?", "options": ["4", "5", "6"], "answer": "5" },
+  { "id": "cnt_012", "question": "Có bao nhiêu cái kẹo?", "options": ["3", "4", "5"], "answer": "4" },
+  { "id": "cnt_013", "question": "Có bao nhiêu cây bút chì?", "options": ["2", "3", "4"], "answer": "3" },
+  { "id": "cnt_014", "question": "Có bao nhiêu con mèo?", "options": ["1", "2", "3"], "answer": "2" },
+  { "id": "cnt_015", "question": "Có bao nhiêu quả cam?", "options": ["4", "5", "6"], "answer": "5" },
+  { "id": "cnt_016", "question": "Có bao nhiêu bạn nhỏ?", "options": ["6", "7", "8"], "answer": "7" },
+  { "id": "cnt_017", "question": "Có bao nhiêu lá cờ?", "options": ["3", "4", "5"], "answer": "4" },
+  { "id": "cnt_018", "question": "Có bao nhiêu con ong?", "options": ["5", "6", "7"], "answer": "6" },
+  { "id": "cnt_019", "question": "Có bao nhiêu đôi giày?", "options": ["1", "2", "3"], "answer": "2" },
+  { "id": "cnt_020", "question": "Có bao nhiêu cái ly?", "options": ["2", "3", "4"], "answer": "3" }
+]

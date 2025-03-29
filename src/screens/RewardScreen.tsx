@@ -1,78 +1,76 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, ActivityIndicator } from 'react-native';
-import axios from 'axios';
-import { getPhone } from '../utils/session';
+import React from 'react';
+import { View, Text, FlatList, StyleSheet, Image, TouchableOpacity } from 'react-native';
 
-const stickerImages = {
-  star: require('../assets/stickers/star.png'),
-  banana: require('../assets/stickers/banana.png'),
-  'math-star': require('../assets/stickers/math-star.png'),
+// Demo dữ liệu sticker
+const rewards = [
+  { id: '1', name: 'Sao xanh', color: 'green', unlocked: true, image: require('../assets/stickers/star.png') },
+  { id: '2', name: 'Bong bóng', color: 'green', unlocked: false, image: require('../assets/stickers/balloon.png') },
+
+  { id: '3', name: 'Hoa lam', color: 'blue', unlocked: true, image: require('../assets/stickers/flower.png') },
+  { id: '4', name: 'Cánh chim', color: 'blue', unlocked: false, image: require('../assets/stickers/bird.png') },
+
+  { id: '5', name: 'Kỳ lân', color: 'purple', unlocked: false, image: require('../assets/stickers/unicorn.png') },
+
+  { id: '6', name: 'Vương miện vàng', color: 'gold', unlocked: false, image: require('../assets/stickers/crown.png') },
+];
+
+// Nhóm sticker theo cấp độ
+const groupByColor = (color: string) =>
+  rewards.filter((item) => item.color === color);
+
+const colorLabel = {
+  green: '🟢 Dễ',
+  blue: '🔵 Trung bình',
+  purple: '🟣 Khó',
+  gold: '🟡 Rất khó'
 };
 
-const skinImages = {
-  'bon-doctor': require('../assets/skins/bon-doctor.webp'),
-  'bon-superman': require('../assets/skins/bon-superman.webp'),
-};
-
-const RewardScreen = () => {
-  const [rewards, setRewards] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  const fetchRewards = async () => {
-    const phone = await getPhone();
-    if (!phone) return;
-
-    try {
-      const res = await axios.get('https://conhocgioi-api.onrender.com/get-parent-info', {
-        params: { phone }
-      });
-
-      const child = res.data.children?.[0];
-      if (child?.rewards) setRewards(child.rewards);
-    } catch (err) {
-      console.error('Lỗi tải reward:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchRewards();
-  }, []);
-
-  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
-
+export default function RewardScreen() {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>🎁 Bộ Sưu Tập Của Bé</Text>
-
-      <Text style={styles.section}>⭐ Sao tích lũy</Text>
-      <Text style={styles.count}>{rewards?.stars || 0} ⭐</Text>
-
-      <Text style={styles.section}>📦 Sticker đã mở</Text>
-      <View style={styles.row}>
-        {rewards?.stickers?.map((s, i) => (
-          <Image key={i} source={stickerImages[s]} style={styles.icon} />
-        ))}
-      </View>
-
-      <Text style={styles.section}>🧸 Skin Bon đã sở hữu</Text>
-      <View style={styles.row}>
-        {rewards?.unlockedSkins?.map((s, i) => (
-          <Image key={i} source={skinImages[s]} style={[styles.icon, { borderRadius: 12 }]} />
-        ))}
-      </View>
-    </ScrollView>
+    <FlatList
+      ListHeaderComponent={<Text style={styles.title}>Bộ sưu tập Sticker 🎁</Text>}
+      data={['green', 'blue', 'purple', 'gold']}
+      keyExtractor={(item) => item}
+      renderItem={({ item: color }) => (
+        <View style={styles.group}>
+          <Text style={styles.groupTitle}>{colorLabel[color]}</Text>
+          <View style={styles.row}>
+            {groupByColor(color).map((reward) => (
+              <TouchableOpacity key={reward.id} disabled={!reward.unlocked}>
+                <Image
+                  source={reward.image}
+                  style={[
+                    styles.sticker,
+                    !reward.unlocked && { opacity: 0.2 }
+                  ]}
+                />
+                <Text style={styles.stickerLabel}>{reward.name}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </View>
+      )}
+    />
   );
-};
-
-export default RewardScreen;
+}
 
 const styles = StyleSheet.create({
-  container: { padding: 24 },
-  title: { fontSize: 26, fontWeight: 'bold', textAlign: 'center', marginBottom: 20 },
-  section: { fontSize: 20, fontWeight: 'bold', marginTop: 20, marginBottom: 8 },
-  count: { fontSize: 24, color: '#e67e22' },
-  row: { flexDirection: 'row', flexWrap: 'wrap', gap: 12 },
-  icon: { width: 60, height: 60, margin: 6 }
+  title: {
+    fontSize: 24, fontWeight: 'bold', textAlign: 'center', marginTop: 20, marginBottom: 10
+  },
+  group: {
+    marginBottom: 20, paddingHorizontal: 16
+  },
+  groupTitle: {
+    fontSize: 18, fontWeight: '600', marginBottom: 10
+  },
+  row: {
+    flexDirection: 'row', flexWrap: 'wrap', gap: 12
+  },
+  sticker: {
+    width: 80, height: 80, resizeMode: 'contain', marginBottom: 6
+  },
+  stickerLabel: {
+    fontSize: 14, textAlign: 'center', width: 80
+  }
 });

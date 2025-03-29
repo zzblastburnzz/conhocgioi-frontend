@@ -1,53 +1,62 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, StyleSheet, ActivityIndicator, Alert } from 'react-native';
-import axios from 'axios';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { getProgress } from '../utils/progress';
 
-const ParentZoneScreen = ({ route }) => {
-  const { phone } = route.params;
-  const [loading, setLoading] = useState(true);
-  const [children, setChildren] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const res = await axios.get('https://conhocgioi-api.onrender.com/get-parent-info', {
-        params: { phone }
-      });
-      setChildren(res.data.children || []);
-    } catch (error) {
-      Alert.alert('Lỗi', 'Không lấy được dữ liệu phụ huynh');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  if (loading) return <ActivityIndicator size="large" style={{ marginTop: 50 }} />;
-
-  return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>👨‍👧 Bé của bạn</Text>
-      {children.length === 0 && <Text>Bạn chưa thêm bé nào</Text>}
-      {children.map((child, index) => (
-        <View key={index} style={styles.card}>
-          <Text style={styles.name}>{child.name} ({child.age} tuổi)</Text>
-          <Text>📐 Toán: {child.progress?.math || 0}%</Text>
-          <Text>🔤 Chữ cái: {child.progress?.alphabet || 0}%</Text>
-          <Text>🧩 Ghép vần: {child.progress?.syllable || 0}%</Text>
-          <Text>🧠 Kiểm tra: {child.progress?.quiz || 0}%</Text>
-        </View>
-      ))}
-    </ScrollView>
-  );
+const TOTAL_QUESTIONS: { [subject: string]: number } = {
+  Toán: 3,
+  'Chữ cái': 29,
+  'Ghép vần': 10,
+  'Luyện tập': 3
 };
 
-export default ParentZoneScreen;
+export default function ParentZoneScreen() {
+  const [progress, setProgress] = useState<{ subject: string; done: number; total: number }[]>([]);
+
+  useEffect(() => {
+    const load = async () => {
+      const data = await getProgress('Bon');
+      const formatted = Object.entries(TOTAL_QUESTIONS).map(([subject, total]) => ({
+        subject,
+        total,
+        done: data[subject] || 0
+      }));
+      setProgress(formatted);
+    };
+    load();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Khu vực phụ huynh</Text>
+      <Text style={styles.childName}>👶 Bé: Bon (5 tuổi)</Text>
+
+      <FlatList
+        data={progress}
+        keyExtractor={(item) => item.subject}
+        renderItem={({ item }) => (
+          <View style={styles.progressItem}>
+            <Text style={styles.subject}>{item.subject}</Text>
+            <Text style={styles.percent}>
+              {item.done}/{item.total} bài ({Math.round((item.done / item.total) * 100)}%)
+            </Text>
+          </View>
+        )}
+        style={{ marginTop: 20 }}
+      />
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
-  container: { padding: 24 },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 16 },
-  card: { borderWidth: 1, borderRadius: 12, padding: 16, marginBottom: 16, backgroundColor: '#fff' },
-  name: { fontSize: 18, fontWeight: 'bold', marginBottom: 8 },
+  container: { flex: 1, padding: 20 },
+  title: { fontSize: 24, fontWeight: 'bold', textAlign: 'center' },
+  childName: { fontSize: 18, marginTop: 10, textAlign: 'center' },
+  progressItem: {
+    backgroundColor: '#fef4d3',
+    padding: 12,
+    marginVertical: 6,
+    borderRadius: 10
+  },
+  subject: { fontSize: 18, fontWeight: 'bold' },
+  percent: { fontSize: 16, color: '#333' }
 });

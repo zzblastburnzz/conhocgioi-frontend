@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { updateProgress } from '../utils/progress';
 
 const questions = [
   { question: '1 + 1 = ?', correctAnswer: '2', options: ['1', '2', '3'] },
@@ -16,11 +17,12 @@ export default function MathScreen() {
       Alert.alert('Chính xác!', '', [
         {
           text: 'Tiếp tục',
-          onPress: () => {
+          onPress: async () => {
             if (index + 1 < questions.length) {
               setIndex(index + 1);
             } else {
-              Alert.alert('Hoàn thành!', 'Bé đã làm xong bài học.');
+              await updateProgress('Bon', 'Toán');
+              Alert.alert('Hoàn thành!', 'Bé đã làm xong bài Toán.');
               setIndex(0);
             }
           }
@@ -39,19 +41,21 @@ export default function MathScreen() {
           <Text style={styles.optionText}>{opt}</Text>
         </TouchableOpacity>
       ))}
+      <Text style={styles.progress}>Câu {index + 1} / {questions.length}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', padding: 20 },
-  question: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, textAlign: 'center' },
+  question: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
   option: {
-    backgroundColor: '#ffecb3',
-    paddingVertical: 12,
-    marginVertical: 6,
+    backgroundColor: '#d9f8ff',
+    paddingVertical: 14,
     borderRadius: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    marginVertical: 5
   },
-  optionText: { fontSize: 20 }
+  optionText: { fontSize: 18 },
+  progress: { marginTop: 20, textAlign: 'center', color: '#666' }
 });

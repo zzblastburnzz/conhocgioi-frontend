@@ -1,53 +1,73 @@
-import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableWithoutFeedback, Switch } from 'react-native';
 import * as Speech from 'expo-speech';
 
 const alphabet = [
-  'a', 'ă', 'â', 'b', 'c', 'd', 'đ', 'e', 'ê',
-  'g', 'h', 'i', 'k', 'l', 'm', 'n', 'o', 'ô',
-  'ơ', 'p', 'q', 'r', 's', 't', 'u', 'ư', 'v',
-  'x', 'y'
+  'a', 'ă', 'â', 'b', 'c', 'd', 'đ', 'e', 'ê', 'g',
+  'h', 'i', 'k', 'l', 'm', 'n', 'o', 'ô', 'ơ',
+  'p', 'q', 'r', 's', 't', 'u', 'ư', 'v', 'x', 'y'
 ];
+
+function getRandomLetter(current: string): string {
+  let newLetter = current;
+  while (newLetter === current) {
+    const randomIndex = Math.floor(Math.random() * alphabet.length);
+    newLetter = alphabet[randomIndex];
+  }
+  return newLetter;
+}
 
 export default function AlphabetScreen() {
   const [index, setIndex] = useState(0);
-
+  const [shuffle, setShuffle] = useState(false);
   const currentLetter = alphabet[index];
 
-  const speak = () => {
-    Speech.speak(currentLetter, {
-      language: 'vi-VN',
-      rate: 0.7
-    });
-  };
+  useEffect(() => {
+    Speech.speak(currentLetter, { language: 'vi-VN' });
+  }, [index]);
 
-  const next = () => {
-    if (index + 1 < alphabet.length) {
-      setIndex(index + 1);
+  const handleNext = () => {
+    if (shuffle) {
+      const random = getRandomLetter(currentLetter);
+      const newIndex = alphabet.findIndex((ch) => ch === random);
+      setIndex(newIndex);
     } else {
-      setIndex(0); // học lại từ đầu
+      setIndex((prev) => (prev + 1) % alphabet.length);
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Chữ cái:</Text>
-      <Text style={styles.letter}>{currentLetter}</Text>
-      <Button title="Phát âm" onPress={speak} />
-      <View style={{ marginTop: 20 }}>
-        <Button title="Tiếp theo" onPress={next} />
+    <TouchableWithoutFeedback onPress={handleNext}>
+      <View style={styles.container}>
+        <View style={styles.switchContainer}>
+          <Text style={styles.switchLabel}>🔀 Trộn chữ cái</Text>
+          <Switch value={shuffle} onValueChange={setShuffle} />
+        </View>
+
+        <Text style={styles.letter}>{currentLetter}</Text>
+        <Text style={styles.instruction}>👆 Chạm màn hình để học chữ tiếp theo</Text>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  title: { fontSize: 24, marginBottom: 10 },
+  container: {
+    flex: 1, backgroundColor: '#fffdf2',
+    justifyContent: 'center', alignItems: 'center', padding: 20
+  },
+  switchContainer: {
+    position: 'absolute', top: 50, right: 20,
+    flexDirection: 'row', alignItems: 'center'
+  },
+  switchLabel: { marginRight: 8, fontSize: 16 },
   letter: {
-    fontSize: 100,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#333'
+    fontSize: 100, fontWeight: 'bold', color: '#333'
+  },
+  instruction: {
+    marginTop: 30,
+    fontSize: 16,
+    color: '#888',
+    textAlign: 'center'
   }
 });

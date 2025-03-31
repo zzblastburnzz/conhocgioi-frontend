@@ -17,8 +17,10 @@ const MainMenuScreen = () => {
         <Text style={styles.menuText}>📝 Luyện tập</Text>
       </TouchableOpacity>
 
-      {/* Các module chữ cái, ghép vần, bài kiểm tra thêm sau */}
-      
+      <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate('Test')}>
+        <Text style={styles.menuText}>📑 Làm bài kiểm tra</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate('ParentZone')}>
         <Text style={styles.menuText}>👨‍👩‍👧 Dành cho phụ huynh</Text>
       </TouchableOpacity>

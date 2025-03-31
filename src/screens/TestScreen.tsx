@@ -1,8 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
 import QuestionCard from '../components/QuestionCard';
 import ResultCard from '../components/ResultCard';
+
+const allTopicFiles = [
+  'addition.json',
+  'subtraction.json',
+  'comparison.json',
+  'pattern.json',
+  'arrange.json',
+  'find-missing.json',
+  'height.json',
+  'position.json',
+  'counting.json',
+  'quantity-compare.json',
+];
 
 interface Question {
   id: string;
@@ -11,16 +23,13 @@ interface Question {
   answer: string;
 }
 
-const LessonScreen = () => {
-  const route = useRoute<any>();
-  const navigation = useNavigation<any>();
-  const { fileName, title } = route.params;
-
+const TestScreen = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [current, setCurrent] = useState(0);
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fileMap: any = {
     'addition.json': require('../assets/data/toan/addition.json'),
@@ -35,13 +44,25 @@ const LessonScreen = () => {
     'quantity-compare.json': require('../assets/data/toan/quantity-compare.json'),
   };
 
-  useEffect(() => {
-    const loadData = async () => {
-      const res = await fetch(fileMap[fileName]);
+  const shuffle = (arr: any[]) => arr.sort(() => Math.random() - 0.5);
+
+  const loadQuestions = async () => {
+    setLoading(true);
+    let all: Question[] = [];
+
+    for (const file of allTopicFiles) {
+      const res = await fetch(fileMap[file]);
       const data = await res.json();
-      setQuestions(data);
-    };
-    loadData();
+      all.push(...data);
+    }
+
+    const randomQuestions = shuffle(all).slice(0, 10);
+    setQuestions(randomQuestions);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    loadQuestions();
   }, []);
 
   const handleSelect = (option: string) => {
@@ -65,9 +86,10 @@ const LessonScreen = () => {
     setScore(0);
     setSelected(null);
     setShowResult(false);
+    loadQuestions();
   };
 
-  if (questions.length === 0) {
+  if (loading || questions.length === 0) {
     return <ActivityIndicator style={{ marginTop: 50 }} />;
   }
 
@@ -77,7 +99,7 @@ const LessonScreen = () => {
         score={score}
         total={questions.length}
         onRetry={handleRestart}
-        onBack={() => navigation.navigate('Math')}
+        onBack={handleRestart}
       />
     );
   }
@@ -98,7 +120,7 @@ const LessonScreen = () => {
   );
 };
 
-export default LessonScreen;
+export default TestScreen;
 
 const styles = StyleSheet.create({
   container: {

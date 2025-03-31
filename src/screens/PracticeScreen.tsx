@@ -32,6 +32,19 @@ const PracticeScreen = () => {
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const fileMap: any = {
+    'addition.json': require('../assets/data/toan/addition.json'),
+    'subtraction.json': require('../assets/data/toan/subtraction.json'),
+    'comparison.json': require('../assets/data/toan/comparison.json'),
+    'pattern.json': require('../assets/data/toan/pattern.json'),
+    'arrange.json': require('../assets/data/toan/arrange.json'),
+    'find-missing.json': require('../assets/data/toan/find-missing.json'),
+    'height.json': require('../assets/data/toan/height.json'),
+    'position.json': require('../assets/data/toan/position.json'),
+    'counting.json': require('../assets/data/toan/counting.json'),
+    'quantity-compare.json': require('../assets/data/toan/quantity-compare.json'),
+  };
+
   const shuffle = (arr: any[]) => arr.sort(() => Math.random() - 0.5);
 
   const loadQuestions = async (total: number) => {
@@ -39,8 +52,7 @@ const PracticeScreen = () => {
     let all: Question[] = [];
 
     for (const file of allTopicFiles) {
-      const filePath = require(`../assets/data/toan/${file}`);
-      const res = await fetch(filePath);
+      const res = await fetch(fileMap[file]);
       const data = await res.json();
       all.push(...data);
     }

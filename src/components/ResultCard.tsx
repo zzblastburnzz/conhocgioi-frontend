@@ -15,11 +15,11 @@ const ResultCard = ({ score, total, onRetry, onBack }: ResultCardProps) => {
       <Text style={styles.score}>Bạn đúng {score}/{total} câu 🎉</Text>
 
       <TouchableOpacity style={styles.button} onPress={onRetry}>
-        <Text style={styles.buttonText}>Làm lại</Text>
+        <Text style={styles.buttonText}>🔁 Làm lại</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={[styles.button, styles.backButton]} onPress={onBack}>
-        <Text style={styles.buttonText}>Về trang chính</Text>
+        <Text style={styles.buttonText}>🏠 Về trang chính</Text>
       </TouchableOpacity>
     </View>
   );
@@ -33,12 +33,14 @@ const styles = StyleSheet.create({
     padding: 24,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#FFFDE7',
   },
   title: {
     fontSize: 24,
     fontWeight: '600',
     marginBottom: 12,
     textAlign: 'center',
+    color: '#4CAF50',
   },
   score: {
     fontSize: 20,
@@ -51,15 +53,15 @@ const styles = StyleSheet.create({
     padding: 14,
     borderRadius: 12,
     marginVertical: 10,
-    width: '60%',
+    width: '70%',
+  },
+  backButton: {
+    backgroundColor: '#FFB84C',
   },
   buttonText: {
     color: '#fff',
     fontWeight: '600',
     textAlign: 'center',
     fontSize: 16,
-  },
-  backButton: {
-    backgroundColor: '#FFB84C',
   },
 });
